@@ -1,9 +1,17 @@
-// IIFE -- Immediately Invoked Function Express
-// AKA anonymous self-executing function
+
+/**
+ * 
+ * app.js file, used to inject site content to the various html pages within our site
+ * home to js functions required by documentation
+ * 
+ * @author Mitchell Grubb + Mateen Hamed
+ * @since 2/3/2022
+ */
 
 "use strict";
 (function()
 {
+
     function DisplayHome()
     {
         console.log("Home Page");
@@ -21,7 +29,7 @@
         // Step 2 - Create a HTML Element in memory
         let MainParagraph = document.createElement("p");
         let Article = document.createElement("article");
-        let ArticleParagraph = `<p id="ArticleParagraph" class="mt-3">This is the Article Paragraph</p>`;
+        let ArticleParagraph = `<p id="ArticleParagraph" class="mt-3">Welcome to our site</p>`;
 
         // Step 3 - Configure new Element
         MainParagraph.setAttribute("id", "MainParagraph");
