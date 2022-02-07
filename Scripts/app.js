@@ -16,6 +16,17 @@
     {
         console.log("Home Page");
 
+        
+
+    
+        // Alters content of the productNav element to display Projects
+        let productNav = document.getElementById("productNav");
+        productNav.innerHTML = 
+        `              
+        <li class="nav-item">
+        <a class="nav-link" id="productNav" href="products.html"><i class="fas fa-project-diagram"> </i>Projects</a>
+        </li>`;
+
         let AboutUsButton = document.getElementById("AboutUsButton");
         AboutUsButton.addEventListener("click", function()
         {
@@ -25,6 +36,8 @@
         // Step 1 - get a reference to an entry point(s) (insertion / deletion point)
         let MainContent = document.getElementsByTagName("main")[0];
         let DocumentBody = document.body;
+
+        let humanResourceNav = document.getElementsByTagName("")
         
         // Step 2 - Create a HTML Element in memory
         let MainParagraph = document.createElement("p");
@@ -54,9 +67,9 @@
         console.log("About Us Page");
     }
 
-    function DisplayProjectsPage()
+    function DisplayProductsPage()
     {
-        console.log("Our Projects Page");
+        console.log("Our Products Page");
     }
 
     function DisplayServicesPage()
