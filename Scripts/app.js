@@ -9,60 +9,155 @@
  */
 
 "use strict";
+
+
 (function()
 {
 
-    function DisplayHome()
-    {
-        console.log("Home Page");
 
+    /**
+     * Display Bottom Nav Function / Cleans Code Clutter rather than having in each switch case
+     */
+    function DisplayBottomNav()
+    {
+        // Inserting Bottom Copyright NavBar through the DOM
+        let bottomNav = document.createElement('nav');
+        bottomNav.setAttribute("id", "BottomNav");
+        bottomNav.innerHTML = `<nav class="navbar fixed-bottom navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">&copy CopyRight Feb 6, 2022</a>
+        </div>
+        </nav>`;
+        document.body.appendChild(bottomNav);
+    }
+
+     
+    function ProjectNav()
+    {
         // Alters content of the productNav element to display Projects
         let productNav = document.getElementById("productNav");
         productNav.innerHTML = 
         `<li class="nav-item">
         <a class="nav-link" id="productNav" href="products.html"><i class="fas fa-project-diagram"> </i>Projects</a>
         </li>`;
+       
+    }
 
-        let AboutUsButton = document.getElementById("AboutUsButton");
-        AboutUsButton.addEventListener("click", function()
-        {
-            location.href = "about.html";
-        });
+    // Function to Position HR Nav Option to the Nav Bar in between About Us and Contact Us
+    function HRNavOption()
+    {
+        const createElementWithOptions = (type, options = {}) => Object.assign(document.createElement(type), options);
 
-        // Step 1 - get a reference to an entry point(s) (insertion / deletion point)
-        let MainContent = document.getElementsByTagName("main")[0];
-        let DocumentBody = document.body;
+        const navItem = createElementWithOptions("li", {className: "nav-item"});
+        const navLink = createElementWithOptions("a", {className: "nav-link", href: "humanResources.html"});
 
-        let humanResourceNav = document.getElementsByTagName("")
+        navLink.append(
+          createElementWithOptions("i", {className: "fas fa-user-circle"}),
+          createElementWithOptions("span", {textContent: " Human Resources"}),
+        );
+        navItem.append(navLink);
+        //document.getElementById("NavOptions").append(navItem);
+        $('#NavOptions li:eq(4)').after(navItem);
+    }
+
+
+    function DisplayHome()
+    {
+        console.log("Home Page");
+
+        // // Alters content of the productNav element to display Projects
+        // let productNav = document.getElementById("productNav");
+        // productNav.innerHTML = 
+        // `<li class="nav-item">
+        // <a class="nav-link" id="productNav" href="products.html"><i class="fas fa-project-diagram"> </i>Projects</a>
+        // </li>`;
+
+        ProjectNav();
+
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
+
+        HRNavOption();
+
+
+
+        // // Step 1 - get a reference to an entry point(s) (insertion / deletion point)
+        // let MainContent = document.getElementsByTagName("main")[0];
+        // let DocumentBody = document.body;
         
-        // Step 2 - Create a HTML Element in memory
-        let MainParagraph = document.createElement("p");
-        let Article = document.createElement("article");
-        let ArticleParagraph = `<p id="ArticleParagraph" class="mt-3">Welcome to our site</p>`;
+        // 
+        // let MainParagraph = document.createElement("p");
+        // let Article = document.createElement("article");
+        // let ArticleParagraph = `<p id="ArticleParagraph" class="mt-3">Welcome to our site</p>`;
 
-        // Step 3 - Configure new Element
-        MainParagraph.setAttribute("id", "MainParagraph");
-        MainParagraph.setAttribute("class", "mt-3");
-        let FirstString = "This is";
-        let SecondString = `${FirstString} the Main Paragraph`;
-        MainParagraph.textContent = SecondString;
-        Article.setAttribute("class", "container");
+        // // Step 3 - Configure new Element
+        // MainParagraph.setAttribute("id", "MainParagraph");
+        // MainParagraph.setAttribute("class", "mt-3");
+        // let FirstString = "This is";
+        // let SecondString = `${FirstString} the Main Paragraph`;
+        // MainParagraph.textContent = SecondString;
+        // Article.setAttribute("class", "container");
 
 
-        // Step 4 - perform insertion / deletion
+        // // Step 4 - perform insertion / deletion
 
-        // example of insert after (append)
-        MainContent.appendChild(MainParagraph);
-        Article.innerHTML = ArticleParagraph;
-        DocumentBody.appendChild(Article);
+        // // example of insert after (append)
+        // MainContent.appendChild(MainParagraph);
+        // Article.innerHTML = ArticleParagraph;
+        // DocumentBody.appendChild(Article);
+
 
     }
 
     function DisplayAboutPage()
     {
         console.log("About Us Page");
+
+        ProjectNav();
+
+        // Creating references to multiple entry points within the document
+        // Project 1 elements
+        let partnerOneHeader = document.getElementById("mitchellHeader");
+        let partnerOneParagraph = document.getElementById("mitchellDesc");
+        let partnerOneEmail = document.getElementById("mitchellEmail");
+
+        // Project 2 elements
+        let partnerTwoHeader = document.getElementById("mateenHeader");
+        let partnerTwoParagraph = document.getElementById("mateenDesc");
+        let partnerTwoEmail = document.getElementById("mateenEmail");
+
+        // Element Configurations
+        // Partner 1 Config
+        let headerContentOne = "Mitchell Grubb";
+        let paragraphContentOne = "Enjoys developing software and working through the problems that come with it! Currently in 2nd year CPA at Durham College";
+        let emailContentOne = "mitchell.grubb@dcmail.ca";
+
+        // Partner 2 Config
+        let headerContentTwo = "Mateen Hamed";
+        let paragraphContentTwo = "Hello, My name is Mateen and I'm highly passionate about Crypto/Blockchain technologies" + 
+        "\n If you know me, you know I love NFT's and am a huge advocate for them being able to change the world!" +
+        "\n#NFTeen";
+        let emailContentTwo = "mateen.hamed@dcmail.ca";
+
+        // Element Insertion
+        // Partner 1
+        partnerOneHeader.innerHTML = headerContentOne;
+        partnerOneParagraph.innerHTML = paragraphContentOne;
+        partnerOneEmail.innerHTML = emailContentOne;
+
+        // Partner 2
+        partnerTwoHeader.innerHTML = headerContentTwo;
+        partnerTwoParagraph.innerHTML = paragraphContentTwo;
+        partnerTwoEmail.innerHTML = emailContentTwo;
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
     }
 
+    /**
+     * Displays Project page information using DOM manipulation as the page is loaded
+     */
     function DisplayProductsPage()
     {
         console.log("Our Products Page");
@@ -85,11 +180,13 @@
         let headerContentOne = "C# Entity Framework Project";
         let paragraphContentOne = "This project was the first time that we used Entity Frameworks to interface with .NET objects within a database!"
 
+        // Project 2 Config
         let headerContentTwo = "Python Discord Bot";
         let paragraphContentTwo = "This was the first time I worked with the Discord API alongside python," 
         + "I used Replit to host/write the bot, it did simple things like add movies to a list, choose movies from the list," +
         "remove movies from the list, all through Discords API commands.";
 
+        // Project 3 Config
         let headerContentThree = "C# Text Editor";
         let paragraphContentThree = "This was a project from early last semester, this project really helped me understand how reading and writing to files works,"+
         " which has proved extremely valuable as we move forward.";
@@ -106,8 +203,16 @@
         //Project 3
         projectThreeHeader.innerHTML = headerContentThree;
         projectThreeParagraph.innerHTML = paragraphContentThree;
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
+
+        ProjectNav();
     }
 
+    /**
+     * Displays Services using DOM manipulation as the Services page is loaded.
+     */
     function DisplayServicesPage()
     {
         console.log("Our Services Page");
@@ -154,6 +259,11 @@
         // Service 3
         serviceThreeHeader.innerHTML = headerContentThree;
         serviceThreeParagraph.innerHTML = paragraphContentThree;
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
+
+        ProjectNav();
         
     }
 
@@ -177,49 +287,20 @@
                 }
             }
         });
-    }
 
-    function DisplayContactListPage()
-    {
-        console.log("Contact-List Page");
-        if(localStorage.length > 0)
-        {
-            let contactList = document.getElementById("contactList");
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
 
-            let data = ""; // data container -> add deserialized data from the localStorage
-
-            let keys = Object.keys(localStorage); // returns a string array of keys
-
-            let index = 1; // counts how many keys
-
-            // for every key in the keys array (collection), loop
-            for (const key of keys) 
-            {
-                let contactData = localStorage.getItem(key); // get localStorage data value related to the key
-
-                let contact = new Contact(); // create a new empty contact object
-                contact.deserialize(contactData);
-
-                // inject a repeatable row into the contactList
-                data += `<tr>
-                <th scope="row" class="text-center">${index}</th>
-                <td>${contact.FullName}</td>
-                <td>${contact.ContactNumber}</td>
-                <td>${contact.EmailAddress}</td>
-                <td></td>
-                <td></td>
-                </tr>
-                `;
-
-                index++;
-            }
-
-            contactList.innerHTML = data;
-        }
+        ProjectNav();
     }
 
 
-    // named function
+    /**
+     * Start Function that makes use of a Switch case which allows for different page functions to run
+     * as the pages are opened
+     * 
+     * Taken from ICE Excercises
+     */
     function Start()
     {
         console.log("App Started!!");
