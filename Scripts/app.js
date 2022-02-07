@@ -16,9 +16,6 @@
     {
         console.log("Home Page");
 
-        
-
-    
         // Alters content of the productNav element to display Projects
         let productNav = document.getElementById("productNav");
         productNav.innerHTML = 
@@ -70,7 +67,6 @@
     {
         console.log("Our Products Page");
 
-
         // Creating references to multiple entry points within the document
         // Project 1 elements
         let projectOneHeader = document.getElementById("project-1-header");
@@ -98,9 +94,6 @@
         let paragraphContentThree = "This was a project from early last semester, this project really helped me understand how reading and writing to files works,"+
         " which has proved extremely valuable as we move forward.";
 
-
-
-
         // Element Insertion
         // Project 1
         projectOneHeader.innerHTML = headerContentOne;
@@ -119,9 +112,49 @@
     {
         console.log("Our Services Page");
 
+        // Creating references to multiple entry points within the document
+        // Service 1 elements
+        let serviceOneHeader = document.getElementById("service-1-header");
+        let serviceOneParagraph = document.getElementById("service-1-p");
 
+        // Service 2 elements
+        let serviceTwoHeader = document.getElementById("service-2-header");
+        let serviceTwoParagraph = document.getElementById("service-2-p");
+
+        // Service 3 elements
+        let serviceThreeHeader = document.getElementById("service-3-header");
+        let serviceThreeParagraph = document.getElementById("service-3-p");
+
+        // Element Configurations
+        // Service 1 Config
+        let headerContentOne = "Python Development";
+        let paragraphContentOne = "Python is the langauage we have worked with the most, and are able to use it in more complex scenarios when comparing to our other services. " +
+         "Whether it be UnitTesting, Algorithms or Automation.";
+
+        // Service 2 Config
+        let headerContentTwo = "C# and .NET Development";
+        let paragraphContentTwo = "Having worked with C++ and C# we have a decent understanding of OOP principles and .NET Core and its documentation." + 
+        "We have developed console, .NET, Entity Framework programs within C# while using MVC (Model, View, Controller) Principles";
+
+        // Service 3 Config
+        let headerContentThree = "JavaScript Development";
+        let paragraphContentThree = "Having just begun JS our understanding does not compete with the other services listed here but hopefully by" + 
+        " the end of the Semester we will be well on our way!";
+
+
+        // Element Insertion
+        // Service 1
+        serviceOneHeader.innerHTML = headerContentOne;
+        serviceOneParagraph.innerHTML = paragraphContentOne;
+
+        // Service 2
+        serviceTwoHeader.innerHTML = headerContentTwo;
+        serviceTwoParagraph.innerHTML = paragraphContentTwo;
+
+        // Service 3
+        serviceThreeHeader.innerHTML = headerContentThree;
+        serviceThreeParagraph.innerHTML = paragraphContentThree;
         
-
     }
 
     function DisplayContactPage()
