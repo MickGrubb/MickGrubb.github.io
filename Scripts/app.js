@@ -22,8 +22,7 @@
         // Alters content of the productNav element to display Projects
         let productNav = document.getElementById("productNav");
         productNav.innerHTML = 
-        `              
-        <li class="nav-item">
+        `<li class="nav-item">
         <a class="nav-link" id="productNav" href="products.html"><i class="fas fa-project-diagram"> </i>Projects</a>
         </li>`;
 
@@ -70,11 +69,59 @@
     function DisplayProductsPage()
     {
         console.log("Our Products Page");
+
+
+        // Creating references to multiple entry points within the document
+        // Project 1 elements
+        let projectOneHeader = document.getElementById("project-1-header");
+        let projectOneParagraph = document.getElementById("project-1-p");
+
+        // Project 2 elements
+        let projectTwoHeader = document.getElementById("project-2-header");
+        let projectTwoParagraph = document.getElementById("project-2-p");
+
+        // Project 3 elements
+        let projectThreeHeader = document.getElementById("project-3-header");
+        let projectThreeParagraph = document.getElementById("project-3-p");
+
+        // Element Configurations
+        // Project 1 Config
+        let headerContentOne = "C# Entity Framework Project";
+        let paragraphContentOne = "This project was the first time that we used Entity Frameworks to interface with .NET objects within a database!"
+
+        let headerContentTwo = "Python Discord Bot";
+        let paragraphContentTwo = "This was the first time I worked with the Discord API alongside python," 
+        + "I used Replit to host/write the bot, it did simple things like add movies to a list, choose movies from the list," +
+        "remove movies from the list, all through Discords API commands.";
+
+        let headerContentThree = "C# Text Editor";
+        let paragraphContentThree = "This was a project from early last semester, this project really helped me understand how reading and writing to files works,"+
+        " which has proved extremely valuable as we move forward.";
+
+
+
+
+        // Element Insertion
+        // Project 1
+        projectOneHeader.innerHTML = headerContentOne;
+        projectOneParagraph.innerHTML = paragraphContentOne;
+
+        //Project 2
+        projectTwoHeader.innerHTML = headerContentTwo;
+        projectTwoParagraph.innerHTML = paragraphContentTwo;
+
+        //Project 3
+        projectThreeHeader.innerHTML = headerContentThree;
+        projectThreeParagraph.innerHTML = paragraphContentThree;
     }
 
     function DisplayServicesPage()
     {
         console.log("Our Services Page");
+
+
+        
+
     }
 
     function DisplayContactPage()
