@@ -13,8 +13,6 @@
 
 (function()
 {
-
-
     /**
      * Display Bottom Nav Function / Cleans Code Clutter rather than having in each switch case
      */
@@ -56,65 +54,60 @@
           createElementWithOptions("span", {textContent: " Human Resources"}),
         );
         navItem.append(navLink);
-        //document.getElementById("NavOptions").append(navItem);
+        
+        // jQuery Function to add HR link within the 4th index of the NavBar
         $('#NavOptions li:eq(4)').after(navItem);
     }
 
 
     function DisplayHome()
     {
-        console.log("Home Page");
 
-        // // Alters content of the productNav element to display Projects
-        // let productNav = document.getElementById("productNav");
-        // productNav.innerHTML = 
-        // `<li class="nav-item">
-        // <a class="nav-link" id="productNav" href="products.html"><i class="fas fa-project-diagram"> </i>Projects</a>
-        // </li>`;
-
+        // Call to Project Nav Function
         ProjectNav();
-
 
         // Call to Bottom Nav Function
         DisplayBottomNav();
 
+        // Call to HR Nav Function
         HRNavOption();
 
 
 
-        // // Step 1 - get a reference to an entry point(s) (insertion / deletion point)
-        // let MainContent = document.getElementsByTagName("main")[0];
-        // let DocumentBody = document.body;
-        
-        // 
-        // let MainParagraph = document.createElement("p");
-        // let Article = document.createElement("article");
-        // let ArticleParagraph = `<p id="ArticleParagraph" class="mt-3">Welcome to our site</p>`;
+        // Step 1 - get a reference to an entry point(s) (insertion / deletion point)
+        let MainContent = document.getElementsByTagName("main")[0];
+        let DocumentBody = document.body;
+         
+        let MainParagraph = document.createElement("p");
 
-        // // Step 3 - Configure new Element
-        // MainParagraph.setAttribute("id", "MainParagraph");
-        // MainParagraph.setAttribute("class", "mt-3");
-        // let FirstString = "This is";
-        // let SecondString = `${FirstString} the Main Paragraph`;
-        // MainParagraph.textContent = SecondString;
-        // Article.setAttribute("class", "container");
+        // Step 3 - Configure new Element
+        MainParagraph.setAttribute("id", "MainParagraph");
+        MainParagraph.setAttribute("class", "mt-3");
+        let WelcomeMessage = "Welcome to our WEBD6201-Lab 1 Website!";
+        MainParagraph.textContent = WelcomeMessage;
 
 
-        // // Step 4 - perform insertion / deletion
-
-        // // example of insert after (append)
-        // MainContent.appendChild(MainParagraph);
-        // Article.innerHTML = ArticleParagraph;
-        // DocumentBody.appendChild(Article);
+        // Step 4 - perform insertion / deletion
+        MainContent.appendChild(MainParagraph);
 
 
     }
 
+    /**
+     * Display About Page, depends on switch case, contains all DOM manip + more display functions
+     */
     function DisplayAboutPage()
     {
-        console.log("About Us Page");
 
+        // Call to Project Nav Function
         ProjectNav();
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
+
+        // Call to HR Nav Function
+        HRNavOption();
+
 
         // Creating references to multiple entry points within the document
         // Project 1 elements
@@ -150,9 +143,6 @@
         partnerTwoHeader.innerHTML = headerContentTwo;
         partnerTwoParagraph.innerHTML = paragraphContentTwo;
         partnerTwoEmail.innerHTML = emailContentTwo;
-
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
     }
 
     /**
@@ -161,6 +151,15 @@
     function DisplayProductsPage()
     {
         console.log("Our Products Page");
+    
+        // Call to Project Nav Function
+        ProjectNav();
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
+
+        // Call to HR Nav Function
+        HRNavOption();
 
         // Creating references to multiple entry points within the document
         // Project 1 elements
@@ -203,11 +202,6 @@
         //Project 3
         projectThreeHeader.innerHTML = headerContentThree;
         projectThreeParagraph.innerHTML = paragraphContentThree;
-
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
-
-        ProjectNav();
     }
 
     /**
@@ -216,6 +210,15 @@
     function DisplayServicesPage()
     {
         console.log("Our Services Page");
+
+        // Call to Project Nav Function
+        ProjectNav();
+
+        // Call to Bottom Nav Function
+        DisplayBottomNav();
+
+        // Call to HR Nav Function
+        HRNavOption();
 
         // Creating references to multiple entry points within the document
         // Service 1 elements
@@ -259,11 +262,6 @@
         // Service 3
         serviceThreeHeader.innerHTML = headerContentThree;
         serviceThreeParagraph.innerHTML = paragraphContentThree;
-
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
-
-        ProjectNav();
         
     }
 
@@ -287,11 +285,22 @@
                 }
             }
         });
+    }
+
+    /**
+     * Display HumanResources function based on switch case
+     */
+    function DisplayHumanResourcesPage()
+    {
+        // Call to Project Nav Function
+        ProjectNav();
 
         // Call to Bottom Nav Function
         DisplayBottomNav();
 
-        ProjectNav();
+        // Call to HR Nav Function
+        HRNavOption();
+
     }
 
 
@@ -324,6 +333,9 @@
           case "Contact Us":
             DisplayContactPage();
             break;
+          case "Human Resources":
+            DisplayHumanResourcesPage();
+            break;  
         }
     }
     
