@@ -6,6 +6,7 @@
  * 
  * @author Mitchell Grubb + Mateen Hamed
  * @since 2/3/2022
+ * @
  */
 
 "use strict";
@@ -269,22 +270,20 @@
     {
         console.log("Contact Us Page");
 
-        let sendButton = document.getElementById("sendButton");
-        let subscribeCheckbox = document.getElementById("subscribeCheckbox");
-
-        sendButton.addEventListener("click", function()
+        document.getElementById("sendButton").onclick = function()
         {
-            if(subscribeCheckbox.checked)
-            { 
-                let contact = new Contact(fullName.value, contactNumber.value, emailAddress.value);
-                if(contact.serialize())
-                {
-                    let key = contact.FullName.substring(0, 1) + Date.now();
+            let fullName = document.getElementById("fullName").value;
+            let contactNumber = document.getElementById("contactNumber").value;
+            let emailAddress = document.getElementById("emailAddress").value;
+        
+            console.log(fullName,contactNumber,emailAddress);
 
-                    localStorage.setItem(key, contact.serialize());
-                }
-            }
-        });
+            setTimeout(function()
+            {
+                window.location.replace("index.html");
+            }, 3000);
+
+        }
     }
 
     /**
