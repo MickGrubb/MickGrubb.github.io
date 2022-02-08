@@ -270,6 +270,9 @@
     {
         console.log("Contact Us Page");
 
+        let HomeUrl = "https://mickgrubb.github.io/index.html";
+
+
         document.getElementById("sendButton").onclick = function()
         {
             let fullName = document.getElementById("fullName").value;
@@ -280,7 +283,7 @@
 
             setTimeout(function()
             {
-                window.location.replace("index.html");
+                window.location.replace(HomeUrl);
             }, 3000);
 
         }
