@@ -1,17 +1,13 @@
 
 /**
- * 
  * app.js file, used to inject site content to the various html pages within our site
  * home to js functions required by documentation
  * 
- * @author Mitchell Grubb + Mateen Hamed
+ * @authors Mitchell Grubb + Mateen Hamed
  * @since 2/3/2022
- * @
  */
 
 "use strict";
-
-
 (function()
 {
     /**
@@ -45,15 +41,19 @@
     // Function to Position HR Nav Option to the Nav Bar in between About Us and Contact Us
     function HRNavOption()
     {
+        // Const to Store Objects with types and objexts
         const createElementWithOptions = (type, options = {}) => Object.assign(document.createElement(type), options);
 
+        // Creating NavItem Object with a types ("li","a") and options (classname:, href:)
         const navItem = createElementWithOptions("li", {className: "nav-item"});
         const navLink = createElementWithOptions("a", {className: "nav-link", href: "humanResources.html"});
 
+        // Appending types ("i","span") to the navlink with options ("className:, textContent:")
         navLink.append(
           createElementWithOptions("i", {className: "fas fa-user-circle"}),
           createElementWithOptions("span", {textContent: " Human Resources"}),
         );
+        // Appending NavLink to the NavItem
         navItem.append(navLink);
         
         // jQuery Function to add HR link within the 4th index of the NavBar
@@ -266,31 +266,34 @@
         
     }
 
+    /**
+     * Displays Contact page, and executes a function to pull form data and output to the console
+     */
     function DisplayContactPage()
     {
         console.log("Contact Us Page");
 
-        let HomeUrl = "https://mickgrubb.github.io/index.html";
-
-
-        document.getElementById("sendButton").onclick = function()
-        {
-            let fullName = document.getElementById("fullName").value;
-            let contactNumber = document.getElementById("contactNumber").value;
-            let emailAddress = document.getElementById("emailAddress").value;
+        // URL
+        let homeUrl = "file:///C:/Users/MickG/OneDrive/Documents/DurhamCollege/MickGrubb.github.io/index.html";
         
-            console.log(fullName,contactNumber,emailAddress);
-
-            setTimeout(function()
-            {
-                window.location.replace(HomeUrl);
-            }, 3000);
-
-        }
+        document.querySelector("#contactForm").addEventListener("submit", (event) => {
+            // Prevent early submission
+            event.preventDefault();
+            // Creates const form to later be used in populating FormData Object
+            const form = event.target;
+            
+            // Data is equal to a form data object containing the Contact Form's user Input
+            const data = new FormData(form);
+            // Console log the data(FormData) object
+            console.log(Object.fromEntries(data));
+            
+            // Set timeout function for the 3 second redirect delay
+            setTimeout(() => location.href = homeUrl, 3000);
+          });
     }
 
     /**
-     * Display HumanResources function based on switch case
+     * Display HumanResources function based on switch case (Empty? Not sure if we were supposed to fill this with anything)
      */
     function DisplayHumanResourcesPage()
     {
