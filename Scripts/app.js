@@ -1,320 +1,263 @@
+// IIFE -- Immediately Invoked Function Express
+// AKA anonymous self-executing function
 
-/**
- * app.js file, used to inject site content to the various html pages within our site
- * home to js functions required by documentation
- * 
- * @authors Mitchell Grubb + Mateen Hamed
- * @since 2/3/2022
- */
-
-"use strict";
 (function()
 {
-    /**
-     * Display Bottom Nav Function / Cleans Code Clutter rather than having in each switch case
-     */
-    function DisplayBottomNav()
-    {
-        // Inserting Bottom Copyright NavBar through the DOM
-        let bottomNav = document.createElement('nav');
-        bottomNav.setAttribute("id", "BottomNav");
-        bottomNav.innerHTML = `<nav class="navbar fixed-bottom navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">&copy CopyRight Feb 6, 2022</a>
-        </div>
-        </nav>`;
-        document.body.appendChild(bottomNav);
-    }
-
-     
-    function ProjectNav()
-    {
-        // Alters content of the productNav element to display Projects
-        let productNav = document.getElementById("productNav");
-        productNav.innerHTML = 
-        `<li class="nav-item">
-        <a class="nav-link" id="productNav" href="products.html"><i class="fas fa-project-diagram"> </i>Projects</a>
-        </li>`;
-       
-    }
-
-    // Function to Position HR Nav Option to the Nav Bar in between About Us and Contact Us
-    function HRNavOption()
-    {
-        // Const to Store Objects with types and objexts
-        const createElementWithOptions = (type, options = {}) => Object.assign(document.createElement(type), options);
-
-        // Creating NavItem Object with a types ("li","a") and options (classname:, href:)
-        const navItem = createElementWithOptions("li", {className: "nav-item"});
-        const navLink = createElementWithOptions("a", {className: "nav-link", href: "humanResources.html"});
-
-        // Appending types ("i","span") to the navlink with options ("className:, textContent:")
-        navLink.append(
-          createElementWithOptions("i", {className: "fas fa-user-circle"}),
-          createElementWithOptions("span", {textContent: " Human Resources"}),
-        );
-        // Appending NavLink to the NavItem
-        navItem.append(navLink);
-        
-        // jQuery Function to add HR link within the 4th index of the NavBar
-        $('#NavOptions li:eq(4)').after(navItem);
-    }
-
-
     function DisplayHome()
     {
+        // Debugging tool
+        console.log("Home Page");
 
-        // Call to Project Nav Function
-        ProjectNav();
+        // jQuery Examples
+        $("#AboutUsButton").on("click", () => 
+        {
+            location.href = "about.html";
+        });
 
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
+        $("main").append(`<p id="MainParagraph" class="mt-3">This is the Main Paragraph</p>`);
 
-        // Call to HR Nav Function
-        HRNavOption();
-
-
-
-        // Step 1 - get a reference to an entry point(s) (insertion / deletion point)
-        let MainContent = document.getElementsByTagName("main")[0];
-        let DocumentBody = document.body;
-         
-        let MainParagraph = document.createElement("p");
-
-        // Step 3 - Configure new Element
-        MainParagraph.setAttribute("id", "MainParagraph");
-        MainParagraph.setAttribute("class", "mt-3");
-        let WelcomeMessage = "Welcome to our WEBD6201-Lab 1 Website!";
-        MainParagraph.textContent = WelcomeMessage;
-
-
-        // Step 4 - perform insertion / deletion
-        MainContent.appendChild(MainParagraph);
-
+        $("body").append(`
+        <article class="container">
+            <p id="ArticleParagraph" class="mt-3">This is the Article Paragraph</p>
+            </article>`);
 
     }
 
-    /**
-     * Display About Page, depends on switch case, contains all DOM manip + more display functions
-     */
     function DisplayAboutPage()
     {
-
-        // Call to Project Nav Function
-        ProjectNav();
-
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
-
-        // Call to HR Nav Function
-        HRNavOption();
-
-
-        // Creating references to multiple entry points within the document
-        // Project 1 elements
-        let partnerOneHeader = document.getElementById("mitchellHeader");
-        let partnerOneParagraph = document.getElementById("mitchellDesc");
-        let partnerOneEmail = document.getElementById("mitchellEmail");
-
-        // Project 2 elements
-        let partnerTwoHeader = document.getElementById("mateenHeader");
-        let partnerTwoParagraph = document.getElementById("mateenDesc");
-        let partnerTwoEmail = document.getElementById("mateenEmail");
-
-        // Element Configurations
-        // Partner 1 Config
-        let headerContentOne = "Mitchell Grubb";
-        let paragraphContentOne = "Enjoys developing software and working through the problems that come with it! Currently in 2nd year CPA at Durham College";
-        let emailContentOne = "mitchell.grubb@dcmail.ca";
-
-        // Partner 2 Config
-        let headerContentTwo = "Mateen Hamed";
-        let paragraphContentTwo = "Hello, My name is Mateen and I'm highly passionate about Crypto/Blockchain technologies" + 
-        "\n If you know me, you know I love NFT's and am a huge advocate for them being able to change the world!" +
-        "\n#NFTeen";
-        let emailContentTwo = "mateen.hamed@dcmail.ca";
-
-        // Element Insertion
-        // Partner 1
-        partnerOneHeader.innerHTML = headerContentOne;
-        partnerOneParagraph.innerHTML = paragraphContentOne;
-        partnerOneEmail.innerHTML = emailContentOne;
-
-        // Partner 2
-        partnerTwoHeader.innerHTML = headerContentTwo;
-        partnerTwoParagraph.innerHTML = paragraphContentTwo;
-        partnerTwoEmail.innerHTML = emailContentTwo;
+        console.log("About Us Page");
     }
 
-    /**
-     * Displays Project page information using DOM manipulation as the page is loaded
-     */
-    function DisplayProductsPage()
+    function DisplayProjectsPage()
     {
-        console.log("Our Products Page");
-    
-        // Call to Project Nav Function
-        ProjectNav();
-
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
-
-        // Call to HR Nav Function
-        HRNavOption();
-
-        // Creating references to multiple entry points within the document
-        // Project 1 elements
-        let projectOneHeader = document.getElementById("project-1-header");
-        let projectOneParagraph = document.getElementById("project-1-p");
-
-        // Project 2 elements
-        let projectTwoHeader = document.getElementById("project-2-header");
-        let projectTwoParagraph = document.getElementById("project-2-p");
-
-        // Project 3 elements
-        let projectThreeHeader = document.getElementById("project-3-header");
-        let projectThreeParagraph = document.getElementById("project-3-p");
-
-        // Element Configurations
-        // Project 1 Config
-        let headerContentOne = "C# Entity Framework Project";
-        let paragraphContentOne = "This project was the first time that we used Entity Frameworks to interface with .NET objects within a database!"
-
-        // Project 2 Config
-        let headerContentTwo = "Python Discord Bot";
-        let paragraphContentTwo = "This was the first time I worked with the Discord API alongside python," 
-        + "I used Replit to host/write the bot, it did simple things like add movies to a list, choose movies from the list," +
-        "remove movies from the list, all through Discords API commands.";
-
-        // Project 3 Config
-        let headerContentThree = "C# Text Editor";
-        let paragraphContentThree = "This was a project from early last semester, this project really helped me understand how reading and writing to files works,"+
-        " which has proved extremely valuable as we move forward.";
-
-        // Element Insertion
-        // Project 1
-        projectOneHeader.innerHTML = headerContentOne;
-        projectOneParagraph.innerHTML = paragraphContentOne;
-
-        //Project 2
-        projectTwoHeader.innerHTML = headerContentTwo;
-        projectTwoParagraph.innerHTML = paragraphContentTwo;
-
-        //Project 3
-        projectThreeHeader.innerHTML = headerContentThree;
-        projectThreeParagraph.innerHTML = paragraphContentThree;
+        console.log("Our Projects Page");
     }
 
-    /**
-     * Displays Services using DOM manipulation as the Services page is loaded.
-     */
     function DisplayServicesPage()
     {
         console.log("Our Services Page");
-
-        // Call to Project Nav Function
-        ProjectNav();
-
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
-
-        // Call to HR Nav Function
-        HRNavOption();
-
-        // Creating references to multiple entry points within the document
-        // Service 1 elements
-        let serviceOneHeader = document.getElementById("service-1-header");
-        let serviceOneParagraph = document.getElementById("service-1-p");
-
-        // Service 2 elements
-        let serviceTwoHeader = document.getElementById("service-2-header");
-        let serviceTwoParagraph = document.getElementById("service-2-p");
-
-        // Service 3 elements
-        let serviceThreeHeader = document.getElementById("service-3-header");
-        let serviceThreeParagraph = document.getElementById("service-3-p");
-
-        // Element Configurations
-        // Service 1 Config
-        let headerContentOne = "Python Development";
-        let paragraphContentOne = "Python is the langauage we have worked with the most, and are able to use it in more complex scenarios when comparing to our other services. " +
-         "Whether it be UnitTesting, Algorithms or Automation.";
-
-        // Service 2 Config
-        let headerContentTwo = "C# and .NET Development";
-        let paragraphContentTwo = "Having worked with C++ and C# we have a decent understanding of OOP principles and .NET Core and its documentation." + 
-        "We have developed console, .NET, Entity Framework programs within C# while using MVC (Model, View, Controller) Principles";
-
-        // Service 3 Config
-        let headerContentThree = "JavaScript Development";
-        let paragraphContentThree = "Having just begun JS our understanding does not compete with the other services listed here but hopefully by" + 
-        " the end of the Semester we will be well on our way!";
-
-
-        // Element Insertion
-        // Service 1
-        serviceOneHeader.innerHTML = headerContentOne;
-        serviceOneParagraph.innerHTML = paragraphContentOne;
-
-        // Service 2
-        serviceTwoHeader.innerHTML = headerContentTwo;
-        serviceTwoParagraph.innerHTML = paragraphContentTwo;
-
-        // Service 3
-        serviceThreeHeader.innerHTML = headerContentThree;
-        serviceThreeParagraph.innerHTML = paragraphContentThree;
-        
     }
 
     /**
-     * Displays Contact page, and executes a function to pull form data and output to the console
+     * Adds a contact Object to localStorage
+     * 
+     * @param {string} fullName 
+     * @param {string} contactNumber 
+     * @param {string} emailAddress 
      */
+    function AddContact(fullName, contactNumber, emailAddress)
+    {
+        let contact = new core.Contact(fullName, contactNumber, emailAddress);
+        if(contact.serialize())
+        {
+            let key = contact.FullName.substring(0, 1) + Date.now();
+
+            localStorage.setItem(key, contact.serialize());
+        }
+    }
+
+
+    /**
+     * This method validates input text fields within the form and displays
+     * an error in the message area appropriately
+     * 
+     * @param {string} input_field_ID 
+     * @param {RegExp} regular_expression 
+     * @param {string} error_message 
+     */
+    function ValidateField(input_field_ID, regular_expression, error_message)
+    {
+        let messageArea = $("#messageArea").hide();
+
+        $("#" + input_field_ID).on("blur", function()
+        {
+            let inputFieldText = $(this).val();
+            if(!regular_expression.test(inputFieldText))
+            {
+                // Doesnt pass ReghEx test
+                $(this).trigger("focus").trigger("select");
+                messageArea.addClass("alert alert-danger").text(error_message).show();
+            }
+            else
+            {
+                // Does pass
+                messageArea.removeAttr("class").hide();
+            }
+        });
+
+    }
+
+    function ContactFormValidation()
+    {
+        ValidateField("fullName", /^([A-Z][a-z]{1,3}\.?\s)?([A-Z][a-z]{1,})((\s|,|-)([A-Z][a-z]{1,}))*(\s|,|-)([A-Z][a-z]{1,})$/, "Please enter a valid Full Name!");
+        ValidateField("contactNumber", /^(\+\d{1,3}[\s-.])?\(?\d{3}\)?[\s-.]?\d{3}[\s-.]?\d{4}$/,"Please Enter a Valid Contact Number!" );
+        ValidateField("emailAddress", /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/, "Please enter a valid Email Address!");
+    }
+
     function DisplayContactPage()
     {
         console.log("Contact Us Page");
 
-        // URL
-        let homeUrl = "file:///C:/Users/MickG/OneDrive/Documents/DurhamCollege/MickGrubb.github.io/index.html";
-        
-        document.querySelector("#contactForm").addEventListener("submit", (event) => {
-            // Prevent early submission
-            event.preventDefault();
-            // Creates const form to later be used in populating FormData Object
-            const form = event.target;
-            
-            // Data is equal to a form data object containing the Contact Form's user Input
-            const data = new FormData(form);
-            // Console log the data(FormData) object
-            console.log(Object.fromEntries(data));
-            
-            // Set timeout function for the 3 second redirect delay
-            setTimeout(() => location.href = homeUrl, 3000);
-          });
+        ContactFormValidation();
+
+        let sendButton = document.getElementById("sendButton");
+        let subscribeCheckbox = document.getElementById("subscribeCheckbox");
+
+        sendButton.addEventListener("click", function()
+        {
+            if(subscribeCheckbox.checked)
+            { 
+                AddContact(fullName.value, contactNumber.value, emailAddress.value)
+            }
+        });
     }
 
-    /**
-     * Display HumanResources function based on switch case (Empty? Not sure if we were supposed to fill this with anything)
-     */
-    function DisplayHumanResourcesPage()
+    function DisplayContactListPage()
     {
-        // Call to Project Nav Function
-        ProjectNav();
+        console.log("Contact-List Page");
+        if(localStorage.length > 0)
+        {
+            let contactList = document.getElementById("contactList");
 
-        // Call to Bottom Nav Function
-        DisplayBottomNav();
+            let data = ""; // data container -> add deserialized data from the localStorage
 
-        // Call to HR Nav Function
-        HRNavOption();
+            let keys = Object.keys(localStorage); // returns a string array of keys
 
+            let index = 1; // counts how many keys
+
+            // for every key in the keys array (collection), loop
+            for (const key of keys) 
+            {
+                let contactData = localStorage.getItem(key); // get localStorage data value related to the key
+
+                let contact = new core.Contact(); // create a new empty contact object
+                contact.deserialize(contactData);
+
+                // inject a repeatable row into the contactList
+                data += `<tr>
+                <th scope="row" class="text-center">${index}</th>
+                <td>${contact.FullName}</td>
+                <td>${contact.ContactNumber}</td>
+                <td>${contact.EmailAddress}</td>
+                <td class="text-center"><button value="${key}" class="btn btn-primary btn-sm edit"><i class="fas fa-edit fa-sm"> Edit</i></button></td>
+                <td class="text-center"><button value="${key}" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt fa-sm"> Delete</i></button></td>
+                </tr>
+                `;
+
+
+
+                index++;
+            }
+
+            contactList.innerHTML = data;
+
+            $("#addButton").on("click", () =>
+            {
+                location.href = "edit.html#add";
+            });
+
+            $("button.delete").on("click", function()
+            {
+                if(confirm("Are you sure?"))
+                {
+                    localStorage.removeItem($(this).val());
+                }
+
+                // refresh after deleting
+                location.href = "contact-list.html";
+            });
+
+            $("button.edit").on("click", function()
+            {
+                location.href = "edit.html#" + $(this).val();
+            });
+        }
+    }
+
+    function DisplayEditPage()
+    {
+        console.log("Edit Page!");
+
+        ContactFormValidation();
+
+        let page = location.hash.substring(1);
+
+        switch(page)
+        {
+            case "add":
+                {
+                    $("main>h1").text("Add Contact");
+
+                    $("#editButton").html(`<i class="fas fa-plus-circle fa-lg"></i> Add`);
+                
+                    $("#editButton").on("click", (event)=>
+                    {
+                        event.preventDefault();
+                        // Add Contact
+                        AddContact(fullName.value, contactNumber.value, emailAddress.value);
+                        // refresh the contact-list page
+                        location.href = "contact-list.html";
+                    });
+
+                    $("#cancelButton").on("click", () =>
+                    {
+                        location.href = "contact-list.html";
+                    });
+                
+                }
+                break;
+            default:
+                {
+                    // Get the contact info from localStorage
+                    let contact = new core.Contact();
+                    contact.deserialize(localStorage.getItem(page));
+
+                    // Display the contact info in the edit form
+                    $("#fullName").val(contact.FullName);
+                    $("#contactNumber").val(contact.ContactNumber);
+                    $("#emailAddress").val(contact.EmailAddress);
+
+                    // when editbutton is pressed - update the contact
+                    $("#editButton").on("click", (event)=>
+                    {
+                        event.preventDefault();
+
+                        // Get any changes from the form
+                        contact.FullName = $("#fullName").val();
+                        contact.ContactNumber = $("#contactNumber").val();
+                        contact.EmailAddress = $("#emailAddress").val();
+                        
+
+                        // Replace the item in localStorage
+                        localStorage.setItem(page, contact.serialize());
+
+                        // Return to the contact list
+                        location.href = "contact-list.html"
+
+                    } );
+                    
+                    $("#cancelButton").on("click", () =>
+                    {
+                        location.href = "contact-list.html";
+                    });
+
+                }
+                break;
+        }
+    }
+
+    function DisplayLoginPage()
+    {
+        console.log("Login Page");
     }
 
 
-    /**
-     * Start Function that makes use of a Switch case which allows for different page functions to run
-     * as the pages are opened
-     * 
-     * Taken from ICE Excercises
-     */
+    function DisplayRegisterPage()
+    {
+        console.log("Register Page");
+    }
+
+    // named function
     function Start()
     {
         console.log("App Started!!");
@@ -338,9 +281,16 @@
           case "Contact Us":
             DisplayContactPage();
             break;
-          case "Human Resources":
-            DisplayHumanResourcesPage();
-            break;  
+          case "Edit":
+              DisplayEditPage();
+            break;
+          case"Login":
+              DisplayLoginPage();
+            break;
+          case "Register":
+              DisplayRegisterPage();
+              break;
+              
         }
     }
     
