@@ -45,11 +45,11 @@
     /**
      * This function loads the header.hmtl content into the page
      * 
-     * @param {string} html_data
+     * @param {string} data
      */
-    function LoadHeader(html_data)
+    function LoadHeader(data)
     {
-        $("header").html(html_data);
+        $("header").html(data);
         $(`li>a:contains(${document.title})`).addClass("active");
         CheckLogin();
     }
