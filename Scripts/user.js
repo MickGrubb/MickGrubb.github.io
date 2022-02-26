@@ -1,12 +1,50 @@
-(function(core){
-
+(function (core) 
+{
     class User
     {
+        // getters and setters
+        get DisplayName()
+        {
+            return this.m_displayName;
+        }
+        
+        set DisplayName(name)
+        {
+            this.m_displayName = name;
+        }
 
-        //TODO: Getters and Setters
+        get EmailAddress()
+        {
+            return this.m_emailAddress;
+        }
 
-        // Constructor Function
-        constructor(displayName = "" , emailAddress = "", username = "", password = "")
+        set EmailAddress(email_address)
+        {
+            this.m_emailAddress = email_address;
+        }
+
+        get Username()
+        {
+            return this.m_username;
+        }
+
+        set Username(username)
+        {
+            this.m_username = username;
+        }
+
+        get Password()
+        {
+            return this.m_password;
+        }
+
+        set Password(password)
+        {
+            this.m_password = password;
+        }
+
+        // constructor
+        constructor(displayName = "", emailAddress = "", username = "", password = "")
         {
             this.DisplayName = displayName;
             this.EmailAddress = emailAddress;
@@ -14,13 +52,13 @@
             this.Password = password;
         }
 
-        // Overidden Methods
+        // method overrides
         toString()
         {
-            return `Display Name: ${this.DisplayName}\nEmail Address: ${this.EmailAddress}\nUsername: ${this.Username}`;
+            return `Display Name    : ${this.DisplayName} \nEmail Address : ${this.EmailAddress} \nUsername : ${this.Username}`;
         }
 
-        // Utility Methods
+        // utility methods
         toJSON()
         {
             return {
@@ -44,11 +82,14 @@
             {
                 return `${this.DisplayName},${this.EmailAddress},${this.Username}`;
             }
-            console.error("One or more properties of the User Object are missing or invalid");
-            return null;
+            else
+            {
+                console.error("One or more properties of the User is empty");
+                return null;
+            }
         }
-    
-        deserialize(data) // assume that data is in a comma-separated format (string array of properties)
+
+        deserialize(data)
         {
             let propertyArray = data.split(",");
             this.DisplayName = propertyArray[0];
@@ -58,6 +99,5 @@
     }
 
     core.User = User;
-
 
 })(core || (core={}));
