@@ -1,22 +1,89 @@
-// IIFE -- Immediately Invoked Function Expression
-// AKA -- Anonymous Self-Executing Function
+// IIFE -- Immediately Invoked Function Express
+// AKA anonymous self-executing function
+
+
+class User
+{
+
+    // getters and setters
+    get FirstName()
+    {
+        return this.m_firstName;
+    }
+    
+    set FirstName(name1)
+    {
+        this.m_firstName = name1;
+    }
+
+    get LastName()
+    {
+        return this.m_lastName;
+    }
+    
+    set LastName(name2)
+    {
+        this.m_lastName = name2;
+    }
+
+    get EmailAddress()
+    {
+        return this.m_emailAddress;
+    }
+
+    set EmailAddress(email_address)
+    {
+        this.m_emailAddress = email_address;
+    }
+
+
+    get Password()
+    {
+        return this.m_password;
+    }
+
+    set Password(password)
+    {
+        this.m_password = password;
+    }
+
+
+    // Constructor Function
+    constructor(firstName = "" ,lastName = "" , emailAddress = "",  password = "")
+    {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.EmailAddress = emailAddress;
+        this.Password = password;
+    }
+
+    // Overidden Methods
+    toString()
+    {
+        return `First Name: ${this.FirstName}\nLast Name: ${this.LastName}\nEmail Address: ${this.EmailAddress}\nPassword: ${this.Password}`;
+    }
+
+}
+
 (function()
 {
+
     /**
-     * This function uses AJAX to open a connection to the server and returns 
-     * the data payload to the callback function
-     *
-     * @param {string} method
-     * @param {string} url
-     * @param {function} callback
+     * This function uses Ajax to open a connection to the server and returns the data payload
+     * to the callback function
+     * 
+     * 
+     * @param {string} method 
+     * @param {string} url 
+     * @param {function} callback 
      */
     function AjaxRequest(method, url, callback)
     {
-        // AJAX STEPS
-        // Step 1. - instantiate an XHR Object
+       // AJAX Steps
+        // Step 1. Instantiate an XHR object
         let XHR = new XMLHttpRequest();
 
-        // Step 2. - add an event listener for readystatechange
+        // Step 2 - add an event listener for readystatechange
         XHR.addEventListener("readystatechange", () =>
         {
             if(XHR.readyState === 4 && XHR.status === 200)
@@ -27,426 +94,310 @@
                 }
                 else
                 {
-                    console.error("ERROR: callback not a function");
+                    console.error("ERROR: Callback not a function");
                 }
             }
         });
 
-        // Step 3. - Open a connection to the server
+        // Step 3 - Open a connection to the server
         XHR.open(method, url);
 
-        // Step 4. - Send the request to the server
+        // Step 4 - Send the request to the server
         XHR.send();
     }
 
     /**
-     * This function loads the header.html content into a page
-     *
-     * @returns {void}
-     */
-    function LoadHeader()
-    {
-        // use AJAX to load the header content
-        $.get("./Views/components/header.html", function(html_data)
-        {
-            // inject Header content into the page
-            $("header").html(html_data);
-
-            document.title = router.ActiveLink.substring(0, 1).toUpperCase() + router.ActiveLink.substring(1);
-
-            //TODO: this needs to be fixed
-            $(`li>a:contains(${document.title})`).addClass("active"); // update active link
-            
-            CheckLogin();
-        });
-       
-    }
-
-    /**
+     * This function loads the header.hmtl content into the page
      * 
-     * 
-     * @returns {void}
+     * @param {string} html_data
      */
-    function LoadContent()
+    function LoadHeader(html_data)
     {
-        let page_name = router.ActiveLink; // alias for the Active Link
-        let callback = ActiveLinkCallBack(); // returns a reference to the correct function
-        $.get(`./Views/content/${page_name}.html`, function(html_date)
-        {
-            $("main").html(html_date);
-            callback(); // calling the correct function 
-        });
+        $("header").html(html_data);
+        $(`li>a:contains(${document.title})`).addClass("active");
+        CheckLogin();
     }
 
-    /**
-     *
-     * @returns {void}
-     */
-    function LoadFooter()
+    function DisplayHome()
     {
-        $.get(`./Views/components/footer.html`, function(html_date)
-        {
-            $("footer").html(html_date);
-        });
-    }
-
-    function DisplayHomePage()
-    {
+        // Debugging tool
         console.log("Home Page");
+
+        // jQuery Examples
         $("#AboutUsButton").on("click", () => 
         {
-            location.href = "/about";
+            location.href = "about.html";
         });
-    
+
         $("main").append(`<p id="MainParagraph" class="mt-3">This is the Main Paragraph</p>`);
-        $("body").append(`<article class="container">
-        <p id="ArticleParagraph" class ="mt-3">This is the Article Paragraph</p>
-        </article>`);
-    }
 
-    function DisplayProductsPage()
-    {
-        console.log("Products Page");
-    }
+        $("body").append(`
+        <article class="container">
+            <p id="ArticleParagraph" class="mt-3">This is the Article Paragraph</p>
+            </article>`);
 
-    function DisplayServicesPage()
-    {
-        console.log("Services Page");
     }
 
     function DisplayAboutPage()
     {
-        console.log("About Page");
+        console.log("About Us Page");
     }
 
-    /**
-     *This function adds a Contact object to localStorage
-     *
-     * @param {string} fullName
-     * @param {string} contactNumber
-     * @param {string} emailAddress
-     */
-    function AddContact(fullName, contactNumber, emailAddress)
+    function DisplayProjectsPage()
     {
-        let contact = new core.Contact(fullName, contactNumber, emailAddress);
-        if(contact.serialize())
-        {
-            let key = contact.FullName.substring(0, 1) + Date.now();
-
-            localStorage.setItem(key, contact.serialize());
-        }
+        console.log("Our Projects Page");
     }
 
-    /**
-     * This method validates a field in the form and displays an error in the message area div element
-     *
-     * @param {string} fieldID
-     * @param {RegExp} regular_expression
-     * @param {string} error_message
-     */
-    function ValidateField(fieldID, regular_expression, error_message)
+    function DisplayServicesPage()
     {
-        let messageArea = $("#messageArea").hide();
-    
-        $("#" + fieldID).on("blur", function()
+        console.log("Our Services Page");
+    }
+
+
+    /**
+     * This method validates input text fields within the form and displays
+     * an error in the message area appropriately
+     * 
+     * @param {string} input_field_ID 
+     * @param {RegExp} regular_expression 
+     * @param {string} error_message 
+     */
+    function ValidateField(input_field_ID, regular_expression, error_message)
+    {
+        let messageArea = $("#ErrorMessage").hide();
+
+        $("#" + input_field_ID).on("blur", function()
         {
-            let text_value = $(this).val();
-            if(!regular_expression.test(text_value))
+            let inputFieldText = $(this).val();
+            if(!regular_expression.test(inputFieldText))
             {
+                // Doesnt pass ReghEx test
                 $(this).trigger("focus").trigger("select");
                 messageArea.addClass("alert alert-danger").text(error_message).show();
             }
             else
             {
+                // Does pass
                 messageArea.removeAttr("class").hide();
             }
         });
+
     }
 
-    function ContactFormValidation()
+    /**
+     * Register Form Regex validation
+     */
+    function RegisterFormValidation()
     {
-        ValidateField("fullName", /^([A-Z][a-z]{1,3}.?\s)?([A-Z][a-z]{1,})((\s|,|-)([A-Z][a-z]{1,}))*(\s|,|-)([A-Z][a-z]{1,})$/, "Please enter a valid Full Name. This must include at least a Capitalized First Name and a Capitalized Last Name.");
-        ValidateField("contactNumber", /^(\+\d{1,3}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/, "Please enter a valid Contact Number. Example: (416) 555-5555");
-        ValidateField("emailAddress", /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,10}$/, "Please enter a valid Email Address.");
-    }
+        ValidateField("FirstName", /([A-Z][a-z]{1,})/, "Please enter a valid First Name! (Minimum 2 Characters");
+        ValidateField("lastName", /([A-Z][a-z]{1,})/, "Please enter a valid Last Name! (Minimum 2 Characters");
+        ValidateField("emailAddress", /[_a-zA-Z0-9-]{7,}@[a-zA-Z0-9.-]+\.[a-zA-Z]+/, "Please enter a valid Email Address!");
+        ValidateField("password", /^.{6,}$/,"Please enter a valid password (6 Character minimum)");
+        ValidateField("confirmPassword",/^.{6,}$/,"Please enter a valid password (6 Character minimum)")
 
+
+    }
 
     function DisplayContactPage()
     {
-        console.log("Contact Page");
+        console.log("Contact Us Page");
 
         ContactFormValidation();
-       
+
         let sendButton = document.getElementById("sendButton");
         let subscribeCheckbox = document.getElementById("subscribeCheckbox");
 
-        sendButton.addEventListener("click", function(event)
+        sendButton.addEventListener("click", function()
         {
-
             if(subscribeCheckbox.checked)
-            {
-                let contact = new core.Contact(fullName.value, contactNumber.value, emailAddress.value);
-                if(contact.serialize())
-                {
-                    let key = contact.FullName.substring(0, 1) + Date.now();
-
-                    localStorage.setItem(key, contact.serialize());
-                }
+            { 
+                AddContact(fullName.value, contactNumber.value, emailAddress.value)
             }
-        });
-    }
-
-    function DisplayContactListPage()
-    {
-        if(localStorage.length > 0)
-        {
-            let contactList = document.getElementById("contactList");
-
-            let data = "";
-
-            let keys = Object.keys(localStorage); // returns a list of keys from localStorage
-
-            let index = 1;
-
-            // for every key in the keys string array
-            for(const key of keys)
-            {
-                let contactData = localStorage.getItem(key); // get localStorage data value
-
-                let contact = new core.Contact(); // create an empty Contact object
-                contact.deserialize(contactData);
-
-                data += `<tr>
-                <th scope="row" class="text-center">${index}</th>
-                <td>${contact.FullName}</td>
-                <td>${contact.ContactNumber}</td>
-                <td>${contact.EmailAddress}</td>
-                <td class="text-center"><button value="${key}" class="btn btn-primary btn-sm edit"><i class="fas fa-edit fa-sm"></i> Edit</button></td>
-                <td class="text-center"><button value="${key}" class="btn btn-danger btn-sm delete"><i class="fas fa-trash-alt fa-sm"></i> Delete</button></td>
-                </tr>`;
-
-                index++;
-            }
-
-            contactList.innerHTML = data;
-
-            $("button.delete").on("click", function()
-            {
-                if(confirm("Are you sure?"))
-                {
-                    localStorage.removeItem($(this).val())
-                }
-                location.href = "/contact-list";
-            });
-
-            $("button.edit").on("click", function()
-            {
-                location.href = "/edit#" + $(this).val();
-            });
-        }
-
-        $("#addButton").on("click", ()=>
-        {
-            location.href = "/edit#add";
         });
     }
 
     /**
-     * This function allows JavaScript to work on the Edit Page
+     * Displays Register page and performs most of the Lab 2 Requirements
      */
-    function DisplayEditPage()
+    function DisplayRegisterPage()
     {
-        console.log("Edit Page");
+        console.log("Register Page");
 
-        ContactFormValidation();
+        // Creating error message div
+        let ErrorMessage = document.createElement('div');
+        ErrorMessage.setAttribute('id','ErrorMessage');
+        document.body.append(ErrorMessage);
 
-        let page = location.hash.substring(1);
 
-        switch(page)
+        // On submit button click compare password fields and move forward accordingly
+        $("#submitButton").on("click", (event)=>
         {
-            case "add":
-                {
-                    $("main>h1").text("Add Contact");
+            event.preventDefault();
 
-                    $("#editButton").html(`<i class="fas fa-plus-circle fa-lg"></i> Add`)
+            // If user has passed all prior validation, and passwords match on click,
+            // create User object and output to console
+            if($('#password').val() == $('#confirmPassword').val())
+            {
+                FirstName = $('#FirstName').val();
+                LastName = $('#lastName').val();
+                EmailAddress = $('#emailAddress').val();
+                Password = $('#password').val();
 
-                    $("#editButton").on("click", (event) =>
-                    {
-                        event.preventDefault();
-                        AddContact(fullName.value, contactNumber.value, emailAddress.value);
-                        location.href = "/contact-list";
-                    });
+                const user = new User(FirstName,LastName,EmailAddress,Password);
 
-                    $("#cancelButton").on("click", () =>
-                    {
-                        location.href = "/contact-list";
-                    });
-                }
-                break;
-            default:
-                {
-                    // get contact info from localStorage
-                    let contact = new core.Contact();
-                    contact.deserialize(localStorage.getItem(page));
+                console.log(user.toString());
+            }
+            // Else Display passwords do not match error
+            else
+            {
 
-                    // display the contact in the edit form
-                    $("#fullName").val(contact.FullName);
-                    $("#contactNumber").val(contact.ContactNumber);
-                    $("#emailAddress").val(contact.EmailAddress);
+                $('#ErrorMessage').addClass("alert alert-danger").text('Passwords do not match try again').show();
+            }
+        });
 
-                    $("#editButton").on("click", (event) =>
-                    {
-                        event.preventDefault();
-                        
-                        // get changes from the page
-                        contact.FullName = $("#fullName").val();
-                        contact.ContactNumber = $("#contactNumber").val();
-                        contact.EmailAddress = $("#emailAddress").val();
-
-                        // replace the item in local storage
-                        localStorage.setItem(page, contact.serialize());
-                        // go back to the contact list page (refresh)
-                        location.href = "/contact-list";
-                    });
-
-                    $("#cancelButton").on("click", () =>
-                    {
-                        location.href = "/contact-list";
-                    });
-                    
-                }
-                break;
-        }
+        RegisterFormValidation();
     }
 
     function DisplayLoginPage()
     {
         console.log("Login Page");
-        let messageArea =  $("#messageArea");
+
+        let messageArea = $("#messageArea");
         messageArea.hide();
+
 
         $("#loginButton").on("click", function()
         {
             let success = false;
-            // create an empty user object
+
+            // Create new empty user object
             let newUser = new core.User();
 
-            // uses jQuery shortcut to load the users.json file
+            // Use jQuery shortcut to load the users.json file
             $.get("./Data/users.json", function(data)
             {
-                // for every user in the users.json file
-                for (const user of data.users) 
+                for(const user of data.users)
                 {
-                    // check if the username and password entered in the form matches this user
+                    // Check if user/pass matches the user data
                     if(username.value == user.Username && password.value == user.Password)
                     {
-                        // get the user data from the file and assign to our empty user object
-                        newUser.fromJSON(user);
-                        success = true;
-                        break;
+                       // Get the user data from the file and assign it to our empty user object
+                       newUser.fromJSON(user);
+                       success = true;
+                       break; 
                     }
                 }
-
-                 // if username and password matches - success.. the perform the login sequence
                 if(success)
                 {
-                    // add user to session storage
+                    // Add user to session storage
                     sessionStorage.setItem("user", newUser.serialize());
-
+        
                     // hide any error message
                     messageArea.removeAttr("class").hide();
-
-                    // redirect the user to the secure area of our site - contact-list.html
-                    location.href = "/contact-list";
+        
+                    // Redirect user to the secure are of the site - contact-list.hmtl
+                    location.href = "contact-list.html";
                 }
-                // else if bad credentials were entered...
                 else
                 {
-                    // display an error message
+                    // Display error message
                     $("#username").trigger("focus").trigger("select");
-                    messageArea.addClass("alert alert-danger").text("Error: Invalid Login Information").show();
+                    messageArea.addClass("alert alert-danger").text("Error: Invalid Login Credentials").show();
                 }
             });
         });
 
-        $("#cancelButton").on("click", function()
+        $("#cancelButton").on("click", function ()
         {
-            // clear the login form
+            // Clear the login form
             document.forms[0].reset();
 
-            // return to the home page
-            location.href = "/home";
+            // Return to the home page
+            location.href = index.html;
         });
     }
 
     function CheckLogin()
     {
-        // if user is logged in
-        if(sessionStorage.getItem("user"))
+    
+        let loggedUser = sessionStorage.getItem("user");
+
+
+        // If user is logged in, then...
+        if(loggedUser)
         {
-            // swap out the login link for logout
+            // Const to Store Objects with types and objexts
+            const createElementWithOptions = (type, options = {}) => Object.assign(document.createElement(type), options);
+
+            // Creating NavItem Object with a types ("li","a") and options (classname:, href:)
+            const navItem = createElementWithOptions("li", {className: "nav-item"});
+            const navLink = createElementWithOptions("a", {className: "nav-link", href: "user.html"});
+
+            // Appending types ("i","span") to the navlink with options ("className:, textContent:")
+            navLink.append(
+              createElementWithOptions("i", {className: "fa-solid fa-user"}),
+              createElementWithOptions("span", {textContent: "user"}),
+            );
+            // Appending NavLink to the NavItem
+            navItem.append(navLink);
+        
+            // jQuery Function to add HR link within the 4th index of the NavBar
+            $('#NavOptions li:eq(4)').after(navItem);
+            
+            // Swap out login link for logout
             $("#login").html(
                 `<a id="logout" class="nav-link" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>`
             );
-            
-            $("#logout").on("click", function()
+
+            $("#logout").on("click", function ()
             {
-                // perform logout
+                // Perform Logout
                 sessionStorage.clear();
-
-                // redirect back to login
-                location.href = "/login";
+                // Redirect to login
+                location.href = "login.html";
             });
+
         }
     }
 
-    function DisplayRegisterPage()
-    {
-        console.log("Register Page");
-    }
-
-    function Display404Page()
-    {
-
-    }
-
-    /**
-     * This method returns the appropriate function callback relative to the Active Link
-     *
-     * @returns {function}
-     */
-    function ActiveLinkCallBack()
-    {
-        switch(router.ActiveLink)
-        {
-            case "home": return DisplayHomePage;
-            case "about": return DisplayAboutPage;
-            case "products": return DisplayProductsPage;
-            case "services": return DisplayServicesPage;
-            case "contact": return DisplayContactPage;
-            case "contact-list": return DisplayContactListPage;
-            case "edit": return DisplayEditPage;
-            case "login": return DisplayLoginPage;
-            case "register": return DisplayRegisterPage;
-            case "404": return Display404Page;
-            default:
-                console.error("ERROR: callback does not exist: " + activeLink);
-                break;
-        }
-    }
-
-    // named function option
+    // named function
     function Start()
     {
-        console.log("App Started!");
+        console.log("App Started!!");
 
-        LoadHeader();
+        AjaxRequest("GET","header.html", LoadHeader);
 
-        LoadContent();
-
-        LoadFooter();
+        switch (document.title) {
+          case "Home":
+            DisplayHome();
+            break;
+          case "About Us":
+            DisplayAboutPage();
+            break;
+          case "Our Products":
+            DisplayProjectsPage();
+            break;
+          case "Our Services":
+            DisplayServicesPage();
+            break;
+          case "Contact-List":
+            DisplayContactListPage();
+            break;
+          case "Contact Us":
+            DisplayContactPage();
+            break;
+          case "Edit":
+              DisplayEditPage();
+            break;
+          case"Login":
+              DisplayLoginPage();
+            break;
+          case "Register":
+              DisplayRegisterPage();
+              break;
+              
+        }
     }
-
+    
     window.addEventListener("load", Start);
-
 })();

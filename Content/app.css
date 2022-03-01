@@ -1,3 +1,4 @@
+/* Custom css goes here */
 .input-group-addon:first-child
 {
     border-right: 0;
@@ -32,6 +33,8 @@
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 }
+
+
 
 .login
 {

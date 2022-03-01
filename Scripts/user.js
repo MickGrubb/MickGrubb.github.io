@@ -1,16 +1,27 @@
-(function (core) 
-{
+(function(core){
+
     class User
     {
+
         // getters and setters
-        get DisplayName()
+        get FirstName()
         {
-            return this.m_displayName;
+            return this.m_firstName;
         }
         
-        set DisplayName(name)
+        set FirstName(name1)
         {
-            this.m_displayName = name;
+            this.m_firstName = name1;
+        }
+
+        get LastName()
+        {
+            return this.m_lastName;
+        }
+        
+        set LastName(name2)
+        {
+            this.m_lastName = name2;
         }
 
         get EmailAddress()
@@ -23,15 +34,6 @@
             this.m_emailAddress = email_address;
         }
 
-        get Username()
-        {
-            return this.m_username;
-        }
-
-        set Username(username)
-        {
-            this.m_username = username;
-        }
 
         get Password()
         {
@@ -43,61 +45,65 @@
             this.m_password = password;
         }
 
-        // constructor
-        constructor(displayName = "", emailAddress = "", username = "", password = "")
+
+        // Constructor Function
+        constructor(firstName = "" ,lastName = "" , emailAddress = "",  password = "")
         {
-            this.DisplayName = displayName;
+            this.FirstName = firstName;
+            this.LastName = lastName;
             this.EmailAddress = emailAddress;
-            this.Username = username;
             this.Password = password;
         }
 
-        // method overrides
+        // Overidden Methods
         toString()
         {
-            return `Display Name    : ${this.DisplayName} \nEmail Address : ${this.EmailAddress} \nUsername : ${this.Username}`;
+            return `Name: ${this.FirstName} ${this.LastName}\nEmail Address: ${this.EmailAddress}`;
         }
 
-        // utility methods
+        retrieveUsername()
+        {
+            return `${this.Username}`;
+        }
+
+        // Utility Methods
         toJSON()
         {
             return {
-                "DisplayName": this.DisplayName,
+                "FirstName": this.FirstName,
+                "LastName": this.LastName,
                 "EmailAddress": this.EmailAddress,
-                "Username": this.Username
             }
         }
 
         fromJSON(data)
         {
-            this.DisplayName = data.DisplayName;
+            this.FirstName = data.FirstName;
+            this.LastName = data.LastName;
             this.EmailAddress = data.EmailAddress;
-            this.Username = data.Username;
             this.Password = data.Password;
         }
 
         serialize()
         {
-            if(this.DisplayName !== "" && this.EmailAddress !== "" && this.Username !== "")
+            if(this.FirstName !== "" && this.LastName !== "" && this.EmailAddress !== "")
             {
-                return `${this.DisplayName},${this.EmailAddress},${this.Username}`;
+                return `${this.FirstName},${this.LastName},${this.EmailAddress}`;
             }
-            else
-            {
-                console.error("One or more properties of the User is empty");
-                return null;
-            }
+            console.error("One or more properties of the User Object are missing or invalid");
+            return null;
         }
-
-        deserialize(data)
+    
+        deserialize(data) // assume that data is in a comma-separated format (string array of properties)
         {
             let propertyArray = data.split(",");
-            this.DisplayName = propertyArray[0];
-            this.EmailAddress = propertyArray[1];
-            this.Username = propertyArray[2];
+            this.FirstName = propertyArray[0];
+            this.LastName = propertyArray[1]
+            this.EmailAddress = propertyArray[2];
         }
     }
 
     core.User = User;
+
 
 })(core || (core={}));
